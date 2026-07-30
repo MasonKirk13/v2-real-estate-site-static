@@ -1,0 +1,8 @@
+{
+  "name": "coastal-arbor-static-v2",
+  "private": true,
+  "scripts": {
+    "dev": "node server.mjs",
+    "check": "node --check content.js && node --check script.js"
+  }
+}

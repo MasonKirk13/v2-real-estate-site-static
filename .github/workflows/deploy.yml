@@ -1,0 +1,22 @@
+name: Deploy static preview
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload site to DreamHost over SFTP
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.DREAMHOST_HOST }}
+          username: ${{ secrets.DREAMHOST_USERNAME }}
+          password: ${{ secrets.DREAMHOST_PASSWORD }}
+          port: 22
+          source: "index.html,styles.css,content.js,script.js,about,available-rentals,buy,consultation,contact,property-management,reviews,search-homes,sell,services"
+          target: ${{ secrets.DREAMHOST_PATH }}
+          overwrite: true
