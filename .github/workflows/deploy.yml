@@ -13,7 +13,7 @@ jobs:
       - name: Prepare publish directory
         run: |
           mkdir publish
-          cp index.html styles.css content.js script.js publish/
+          cp index.html static-fidelity.css publish/
           cp -R assets about available-rentals buy consultation contact property-management reviews search-homes sell services publish/
       - name: Install SFTP client
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp

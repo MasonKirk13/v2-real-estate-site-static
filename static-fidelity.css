@@ -1,0 +1,13 @@
+/* Static-only compatibility for the original WordPress design. */
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+iframe{max-width:100%}
+@media (max-width:782px){
+  .wp-block-navigation__responsive-container-open,
+  .wp-block-navigation__responsive-container-close{display:none!important}
+  .wp-block-navigation__responsive-container:not(.is-menu-open){
+    display:block!important;position:static!important;width:100%!important;
+  }
+  .wp-block-navigation__responsive-container-content{padding-top:0!important}
+  .wp-block-navigation__container{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:.75rem 1rem!important}
+}

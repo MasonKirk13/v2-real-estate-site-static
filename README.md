@@ -14,11 +14,10 @@ Then open `http://localhost:8080`.
 
 ## Structure
 
-- `index.html` — shared HTML shell
-- `content.js` — route-specific page content
-- `styles.css` — responsive visual system
-- `script.js` — routing, mobile navigation, review dialog, and page metadata
-- Each route directory contains an identical `index.html` shell so clean URLs work on standard static hosting.
+- `index.html` — standalone static homepage matching the rendered WordPress design
+- `static-fidelity.css` — small static/mobile compatibility layer
+- Each route directory contains its own standalone `index.html` so clean URLs work without client-side JavaScript.
+- `assets/` contains locally hosted brand imagery, including April Mendenhall's portrait.
 
 ## Deployment
 
