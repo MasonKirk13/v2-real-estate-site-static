@@ -25,6 +25,9 @@ jobs:
         run: |
           lftp -u "$DREAMHOST_USERNAME","$DREAMHOST_PASSWORD" "sftp://$DREAMHOST_HOST:22" -e "
             set sftp:auto-confirm yes;
+            set net:timeout 20;
+            set net:max-retries 2;
+            set net:reconnect-interval-base 5;
             mirror --reverse --delete --verbose publish static-dev.coastalarborgroup.com;
             quit
           "
