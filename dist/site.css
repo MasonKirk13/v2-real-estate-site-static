@@ -62,7 +62,7 @@ ul{padding-left:1.2rem}
 .cag-split--portrait{grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);align-items:start}
 .cag-portrait{width:100%;max-width:460px;height:auto}
 .cag-team-member{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(260px,.72fr);align-items:start;gap:68px;border-top:1px solid var(--line)}
-.cag-team-member__media{position:sticky;top:28px;align-self:start}
+.cag-team-member__media{position:static;align-self:start}
 .cag-team-member__portrait{width:min(100%,360px);height:auto;margin-bottom:28px;border-radius:8px;box-shadow:0 14px 35px rgba(2,38,88,.18)}
 .cag-team-member__bio h2{margin-bottom:8px}
 .cag-team-member__role{color:var(--navy);font-weight:700}
