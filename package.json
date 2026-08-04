@@ -2,7 +2,8 @@
   "name": "coastal-arbor-static-v2",
   "private": true,
   "scripts": {
-    "dev": "node server.mjs",
-    "check": "node --check content.js && node --check script.js"
+    "build": "node build.mjs",
+    "dev": "npm run build && node server.mjs",
+    "check": "node --check build.mjs && node --check server.mjs && node --check validate.mjs && node build.mjs && node validate.mjs"
   }
 }
