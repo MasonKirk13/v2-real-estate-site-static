@@ -1,8 +1,10 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
 
 const root = process.cwd();
 const outputRoot = join(root, "dist");
+const siteCssVersion = createHash("sha256").update(readFileSync(join(root, "site.css"), "utf8")).digest("hex").slice(0, 12);
 
 const pages = [
   { source: "index.html", route: "", label: "Home", title: "Coastal & Arbor Real Estate Group – Real Estate & Property Management", description: "Residential and commercial real estate, property management, leasing, and investment services in Hampton Roads." },
@@ -249,7 +251,7 @@ function pageDocument(page, content) {
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="${description}">
   <title>${page.title}</title>
-  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/site.css?v=${siteCssVersion}">
 </head>
 <body class="${page.route || "home"}">
 ${headerMarkup(page.route)}
