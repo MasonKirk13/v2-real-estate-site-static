@@ -18,6 +18,7 @@ const pages = [
   { source: "about/index.html", route: "about", label: "About Us", title: "About Us | Coastal & Arbor Real Estate Group" },
   { source: "contact/index.html", route: "contact", label: "Contact", title: "Contact | Coastal & Arbor Real Estate Group" },
   { source: "consultation/index.html", route: "consultation", label: "Consultation", title: "Request a Consultation | Coastal & Arbor Real Estate Group" },
+  { source: "consultation/index.html", route: "thank-you", label: "Thank You", title: "Thank You | Coastal & Arbor Real Estate Group", description: "Thank you for contacting Coastal & Arbor Real Estate Group." },
 ];
 
 const navItems = [
@@ -109,6 +110,7 @@ function cleanContent(content) {
     .replace(/\sstyle=("[^"]*"|'[^']*')/gi, "")
     .replace(/class="([^"]*)"/gi, cleanClassAttribute)
     .replace(/https:\/\/dev\.coastalarborgroup\.com\/wp-content\/uploads\/2026\/07\/coastal-arbor-logo\.png/gi, "/assets/coastal-arbor-logo.png")
+    .replace(/\s+\?<\/a>/g, "</a>")
     .replace(/<p>\s*<\/p>/gi, "")
     .replace(/\s{2,}/g, " ")
     .replace(/>\s+</g, ">\n<")
@@ -141,6 +143,7 @@ function consultationContent() {
       <form class="cag-consultation-form" action="https://formsubmit.co/info@coastalarborgroup.com" method="post">
         <input type="hidden" name="_subject" value="New Coastal &amp; Arbor consultation request">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://static-dev.coastalarborgroup.com/thank-you/">
         <label for="consultation-name">Full name</label>
         <input id="consultation-name" name="name" type="text" autocomplete="name" required>
         <label for="consultation-email">Email address</label>
@@ -159,6 +162,23 @@ function consultationContent() {
       </form>
     </div>
     <p class="centered-note">Prefer email? Contact <a href="mailto:info@coastalarborgroup.com">info@coastalarborgroup.com</a>.</p>
+  </div>
+</section>`;
+}
+
+function thankYouContent() {
+  return `<section class="cag-page-hero cag-thank-you-hero">
+  <div class="cag-inner">
+    <p class="cag-eyebrow">Message Received</p>
+    <h1>Thank you for reaching out.</h1>
+    <p class="cag-lead">Your consultation request has been sent to Coastal &amp; Arbor Real Estate Group.</p>
+  </div>
+</section>
+<section class="cag-section cag-thank-you">
+  <div class="cag-inner">
+    <h2>What happens next?</h2>
+    <p>April or a member of the Coastal &amp; Arbor team will review your information and follow up with you directly. You can continue exploring the site while you wait.</p>
+    <div class="cag-actions"><a class="cag-button" href="/">Return Home</a><a class="cag-button cag-button--outline" href="/search-homes/">Search Homes</a></div>
   </div>
 </section>`;
 }
@@ -274,6 +294,8 @@ for (const page of pages) {
   const source = readFileSync(sourcePath, "utf8");
   let content = page.route === "consultation"
     ? consultationContent()
+    : page.route === "thank-you"
+      ? thankYouContent()
     : page.route === "about"
       ? aboutContent(source)
     : page.route === "reviews"

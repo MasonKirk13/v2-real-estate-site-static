@@ -97,6 +97,11 @@ ul{padding-left:1.2rem}
 .cag-cta{padding:70px 28px;background:var(--navy);color:#fff;text-align:center}
 .cag-cta h2{color:#fff}
 .cag-cta p{max-width:720px;margin:0 auto 26px;color:var(--cream)}
+.cag-cta .cag-actions{justify-content:center}
+.cag-thank-you-hero{text-align:center}
+.cag-thank-you-hero .cag-lead{margin-right:auto;margin-left:auto}
+.cag-thank-you{max-width:820px;text-align:center}
+.cag-thank-you .cag-actions{justify-content:center;margin-top:30px}
 .cag-consultation-wrap{max-width:820px}
 .cag-consultation-card{padding:38px;border:1px solid var(--line);border-top:6px solid var(--navy);border-radius:12px;background:#fff;box-shadow:var(--shadow)}
 .cag-consultation-form{display:grid;grid-template-columns:1fr;gap:8px}

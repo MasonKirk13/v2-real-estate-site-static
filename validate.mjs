@@ -43,7 +43,7 @@ for (const file of htmlFiles) {
   }
 }
 
-if (htmlFiles.length !== 11) failures.push(`expected 11 HTML pages, found ${htmlFiles.length}`);
+if (htmlFiles.length !== 12) failures.push(`expected 12 HTML pages, found ${htmlFiles.length}`);
 
 if (failures.length) {
   console.error(failures.join("\n"));
