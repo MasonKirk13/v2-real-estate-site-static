@@ -183,29 +183,6 @@ function thankYouContent() {
 </section>`;
 }
 
-function aboutContent(source) {
-  const content = cleanContent(extractEntry(source));
-  const amyBio = `<section class="cag-section cag-team-member">
-  <div class="cag-team-member__bio">
-    <p class="cag-eyebrow">Meet Amy Heilig</p>
-    <h2>Amy Heilig</h2>
-    <p class="cag-team-member__role">Realtor® | PM Certified Property Manager</p>
-    <p>With nearly 20 years of experience in residential property management, Amy Heilig is a licensed Realtor® and PM Certified Property Manager proudly serving homeowners and residents throughout Hampton Roads. Known for her approachable personality, strong work ethic, and genuine care for others, Amy is passionate about building lasting relationships and providing an exceptional property management experience from start to finish.</p>
-    <p>Throughout her career, Amy has managed every aspect of residential property management, including marketing rental homes, leasing, tenant relations, maintenance coordination, inspections, lease administration, owner communication, and investment property oversight. She understands that every property - and every client - is unique, and she takes pride in providing personalized service, honest communication, and practical solutions that protect her clients' investments while creating positive experiences for residents.</p>
-    <p>Amy believes that successful property management is built on trust, responsiveness, and attention to detail. Whether she's helping a first-time landlord navigate the rental process or assisting a seasoned investor with a growing portfolio, she is committed to treating every property as if it were her own.</p>
-    <p>Outside of work, Amy enjoys spending time with her husband, Josh, and their family, especially making memories with her grandson, Milo, and eagerly anticipating the arrival of her granddaughter later this year. In her free time, she enjoys crafting, home design, and spending time with her beloved animals.</p>
-    <p>Amy's combination of professional credentials, industry knowledge, and nearly two decades of hands-on experience has made her a trusted resource for property owners throughout Hampton Roads. She is committed to delivering responsive, dependable service while helping clients maximize the value of their investment properties.</p>
-  </div>
-  <div class="cag-team-member__media">
-    <img class="cag-team-member__portrait" src="/assets/amy-heilig.jpg" alt="Amy Heilig, Realtor and PM Certified Property Manager" width="512" height="622">
-  </div>
-</section>`;
-  return content
-    .replace(/<\/section>/, `</section>${amyBio}`)
-    .replace(/Tell April what you’re working toward/, "Tell our team what you’re working toward")
-    .replace(/>Contact April</, ">Contact Coastal &amp; Arbor<");
-}
-
 function reviewData(source) {
   const blocks = source.split('<div class="rpi-slide grw-review">').slice(1, 10);
   return blocks.map((block) => {
@@ -296,8 +273,6 @@ for (const page of pages) {
     ? consultationContent()
     : page.route === "thank-you"
       ? thankYouContent()
-    : page.route === "about"
-      ? aboutContent(source)
     : page.route === "reviews"
       ? reviewsContent(source)
       : enhanceExternalEmbeds(cleanContent(extractEntry(source)), page.route);
