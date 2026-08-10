@@ -46,13 +46,11 @@ jobs:
           DREAMHOST_PROD_HOST: ${{ secrets.DREAMHOST_PROD_HOST }}
           DREAMHOST_PROD_USERNAME: ${{ secrets.DREAMHOST_PROD_USERNAME }}
           DREAMHOST_PROD_PASSWORD: ${{ secrets.DREAMHOST_PROD_PASSWORD }}
-          DREAMHOST_PROD_PATH: ${{ secrets.DREAMHOST_PROD_PATH }}
         run: |
           test -n "$DREAMHOST_PROD_HOST"
-          test -n "$DREAMHOST_PROD_USERNAME"
           test -n "$DREAMHOST_PROD_PASSWORD"
-          if [ "$DREAMHOST_PROD_PATH" != "coastalarborgroup.com" ]; then
-            echo "Production path must be exactly coastalarborgroup.com."
+          if [ "$DREAMHOST_PROD_USERNAME" != "dh_ggynae" ]; then
+            echo "Production username does not match the approved hosting user."
             exit 1
           fi
       - name: Upload production site to DreamHost over SFTP
@@ -60,13 +58,12 @@ jobs:
           DREAMHOST_PROD_HOST: ${{ secrets.DREAMHOST_PROD_HOST }}
           DREAMHOST_PROD_USERNAME: ${{ secrets.DREAMHOST_PROD_USERNAME }}
           DREAMHOST_PROD_PASSWORD: ${{ secrets.DREAMHOST_PROD_PASSWORD }}
-          DREAMHOST_PROD_PATH: ${{ secrets.DREAMHOST_PROD_PATH }}
         run: |
           lftp -u "$DREAMHOST_PROD_USERNAME","$DREAMHOST_PROD_PASSWORD" "sftp://$DREAMHOST_PROD_HOST:22" -e "
             set sftp:auto-confirm yes;
             set net:timeout 20;
             set net:max-retries 2;
             set net:reconnect-interval-base 5;
-            mirror --reverse --delete --verbose --exclude-glob .dh-diag --exclude-glob .dh-diag/** dist \"$DREAMHOST_PROD_PATH\";
+            mirror --reverse --delete --verbose --exclude-glob .dh-diag --exclude-glob .dh-diag/** dist .;
             quit
           "
