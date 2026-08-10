@@ -53,7 +53,7 @@ Production output uses canonical `coastalarborgroup.com` URLs, redirects HTTPS a
 
 ## Deployment
 
-The preview workflow deploys pushes to `main` to `https://static-dev.coastalarborgroup.com/`. The production workflow is manual-only, requires the operator to type `coastalarborgroup.com`, validates the production build, verifies the destination path, and then deploys to DreamHost.
+The preview workflow deploys pushes to `main` to `https://static-dev.coastalarborgroup.com/`. The production workflow is manual-only, requires the operator to type `coastalarborgroup.com`, validates the production build, verifies the destination path, preserves DreamHost's `.dh-diag` directory, and then deploys to DreamHost.
 
 The consultation form routes to `info@coastalarborgroup.com`. FormSubmit may send a one-time activation email to that inbox after the first submission.
 

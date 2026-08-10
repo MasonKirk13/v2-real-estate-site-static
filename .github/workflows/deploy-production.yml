@@ -67,6 +67,6 @@ jobs:
             set net:timeout 20;
             set net:max-retries 2;
             set net:reconnect-interval-base 5;
-            mirror --reverse --delete --verbose dist \"$DREAMHOST_PROD_PATH\";
+            mirror --reverse --delete --verbose --exclude-glob .dh-diag --exclude-glob .dh-diag/** dist \"$DREAMHOST_PROD_PATH\";
             quit
           "
