@@ -66,11 +66,6 @@ jobs:
             set net:reconnect-interval-base 5;
             mirror --reverse --delete --verbose \
               --exclude-glob .dh-diag --exclude-glob .dh-diag/** \
-              --exclude-glob .cache --exclude-glob .cache/** \
-              --exclude-glob logs --exclude-glob logs/** \
-              --exclude-glob http --exclude-glob http/** \
-              --exclude-glob https --exclude-glob https/** \
-              --exclude-glob coastalarborgroup.com --exclude-glob coastalarborgroup.com/** \
-              dist .;
+              dist coastalarborgroup.com;
             quit
           "

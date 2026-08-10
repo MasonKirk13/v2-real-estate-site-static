@@ -53,7 +53,7 @@ Production output uses canonical `coastalarborgroup.com` URLs, redirects HTTPS a
 
 ## Deployment
 
-The preview workflow deploys pushes to `main` to `https://static-dev.coastalarborgroup.com/`. The production workflow is manual-only, requires the operator to type `coastalarborgroup.com`, validates the production build, verifies the approved hosting user, preserves DreamHost-managed diagnostic and protocol directories, and deploys into that user's SFTP starting directory (`/home/dh_ggynae/coastalarborgroup.com`).
+The preview workflow deploys pushes to `main` to `https://static-dev.coastalarborgroup.com/`. The production workflow is manual-only, requires the operator to type `coastalarborgroup.com`, validates the production build, verifies the approved hosting user, preserves DreamHost's `.dh-diag` directory, and deploys into the `coastalarborgroup.com` folder under the SFTP user's home (`/home/dh_ggynae/coastalarborgroup.com`).
 
 The consultation form routes to `info@coastalarborgroup.com`. FormSubmit may send a one-time activation email to that inbox after the first submission.
 
