@@ -38,7 +38,6 @@ const navItems = [
 const socialIcons = {
   instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>',
   facebook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 22v-8.8h3l.45-3.45H13.7v-2.2c0-1 .28-1.68 1.73-1.68h1.85V2.8a24.5 24.5 0 0 0-2.7-.14c-2.67 0-4.5 1.63-4.5 4.63v2.46H7.05v3.45h3.03V22h3.62Z"/></svg>',
-  x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.39L6.49 22H3.37l7.25-8.29L2.97 2H9.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.73L8.46 4.05H6.61L17.8 19.84Z"/></svg>',
 };
 
 function navMarkup(currentRoute, mobile = false) {
@@ -71,9 +70,8 @@ function footerMarkup() {
       <span>Coastal &amp; Arbor Real Estate Group</span>
     </a>
     <nav class="social-navigation" aria-label="Social media">
-      <a href="https://www.instagram.com/" aria-label="Instagram" rel="noopener">${socialIcons.instagram}</a>
-      <a href="https://www.facebook.com/" aria-label="Facebook" rel="noopener">${socialIcons.facebook}</a>
-      <a href="https://x.com/" aria-label="X" rel="noopener">${socialIcons.x}</a>
+      <a href="https://www.instagram.com/coastalandarbor/" aria-label="Instagram" rel="noopener">${socialIcons.instagram}</a>
+      <a href="https://www.facebook.com/share/18p84ifkT2/" aria-label="Facebook" rel="noopener">${socialIcons.facebook}</a>
     </nav>
   </div>
 </footer>`;
