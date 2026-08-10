@@ -2,6 +2,8 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = join(process.cwd(), "dist");
+const siteUrl = (process.env.SITE_URL || "https://static-dev.coastalarborgroup.com").replace(/\/+$/, "");
+const isIndexable = process.env.SITE_INDEXABLE === "true";
 const failures = [];
 const htmlFiles = [];
 
@@ -23,6 +25,12 @@ for (const file of htmlFiles) {
   }
   const h1Count = (html.match(/<h1\b/gi) || []).length;
   if (h1Count !== 1) failures.push(`${relative}: expected one h1, found ${h1Count}`);
+  const route = relative === "index.html" ? "" : relative.replace(/[\\/]index\.html$/, "").replace(/\\/g, "/");
+  const pathname = route ? `/${route}/` : "/";
+  const expectedCanonical = `<link rel="canonical" href="${siteUrl}${pathname}">`;
+  if (!html.includes(expectedCanonical)) failures.push(`${relative}: missing canonical ${siteUrl}${pathname}`);
+  const expectedRobots = isIndexable && route !== "thank-you" ? "index, follow" : isIndexable ? "noindex, follow" : "noindex, nofollow";
+  if (!html.includes(`<meta name="robots" content="${expectedRobots}">`)) failures.push(`${relative}: incorrect robots directive`);
   if (/<script\b|wp-content|wp-includes|wp-block|data-wp-|\sonclick=|\sonerror=|javascript:/i.test(html)) failures.push(`${relative}: contains WordPress or client-side script residue`);
   if (/\sstyle=("[^"]*"|'[^']*')/i.test(html)) failures.push(`${relative}: contains inline styles`);
 
@@ -44,6 +52,15 @@ for (const file of htmlFiles) {
 }
 
 if (htmlFiles.length !== 12) failures.push(`expected 12 HTML pages, found ${htmlFiles.length}`);
+
+const robots = readFileSync(join(root, "robots.txt"), "utf8");
+if (isIndexable) {
+  if (!robots.includes("Allow: /") || !robots.includes(`Sitemap: ${siteUrl}/sitemap.xml`)) failures.push("production robots.txt is not indexable");
+  if (!existsSync(join(root, "sitemap.xml"))) failures.push("production sitemap.xml is missing");
+} else {
+  if (!robots.includes("Disallow: /")) failures.push("staging robots.txt does not block indexing");
+  if (existsSync(join(root, "sitemap.xml"))) failures.push("staging build unexpectedly contains sitemap.xml");
+}
 
 if (failures.length) {
   console.error(failures.join("\n"));

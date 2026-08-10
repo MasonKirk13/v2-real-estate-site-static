@@ -1,0 +1,72 @@
+name: Deploy production site
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_domain:
+        description: Type coastalarborgroup.com to confirm the production deployment
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coastal-arbor-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Confirm production target
+        env:
+          CONFIRM_DOMAIN: ${{ inputs.confirm_domain }}
+        run: |
+          if [ "$CONFIRM_DOMAIN" != "coastalarborgroup.com" ]; then
+            echo "Production confirmation did not match coastalarborgroup.com."
+            exit 1
+          fi
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and validate production site
+        env:
+          SITE_URL: https://coastalarborgroup.com
+          SITE_INDEXABLE: "true"
+        run: |
+          node build.mjs
+          node validate.mjs
+      - name: Install SFTP client
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Verify deployment configuration
+        env:
+          DREAMHOST_PROD_HOST: ${{ secrets.DREAMHOST_PROD_HOST }}
+          DREAMHOST_PROD_USERNAME: ${{ secrets.DREAMHOST_PROD_USERNAME }}
+          DREAMHOST_PROD_PASSWORD: ${{ secrets.DREAMHOST_PROD_PASSWORD }}
+          DREAMHOST_PROD_PATH: ${{ secrets.DREAMHOST_PROD_PATH }}
+        run: |
+          test -n "$DREAMHOST_PROD_HOST"
+          test -n "$DREAMHOST_PROD_USERNAME"
+          test -n "$DREAMHOST_PROD_PASSWORD"
+          if [ "$DREAMHOST_PROD_PATH" != "coastalarborgroup.com" ]; then
+            echo "Production path must be exactly coastalarborgroup.com."
+            exit 1
+          fi
+      - name: Upload production site to DreamHost over SFTP
+        env:
+          DREAMHOST_PROD_HOST: ${{ secrets.DREAMHOST_PROD_HOST }}
+          DREAMHOST_PROD_USERNAME: ${{ secrets.DREAMHOST_PROD_USERNAME }}
+          DREAMHOST_PROD_PASSWORD: ${{ secrets.DREAMHOST_PROD_PASSWORD }}
+          DREAMHOST_PROD_PATH: ${{ secrets.DREAMHOST_PROD_PATH }}
+        run: |
+          lftp -u "$DREAMHOST_PROD_USERNAME","$DREAMHOST_PROD_PASSWORD" "sftp://$DREAMHOST_PROD_HOST:22" -e "
+            set sftp:auto-confirm yes;
+            set net:timeout 20;
+            set net:max-retries 2;
+            set net:reconnect-interval-base 5;
+            mirror --reverse --delete --verbose dist \"$DREAMHOST_PROD_PATH\";
+            quit
+          "

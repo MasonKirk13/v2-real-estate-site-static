@@ -36,9 +36,24 @@ The site itself is HTML5 and CSS. Only features that require an outside provider
 
 The review cards and review popup are native HTML/CSS snapshots generated from the source. Google does not allow its review-submission interface to be embedded, so the final posting step opens Google.
 
+## Build environments
+
+The default build targets `https://static-dev.coastalarborgroup.com/`. It is intentionally marked `noindex, nofollow`, and its `robots.txt` blocks indexing.
+
+Build the production variant with:
+
+```powershell
+$env:SITE_URL="https://coastalarborgroup.com"
+$env:SITE_INDEXABLE="true"
+node build.mjs
+node validate.mjs
+```
+
+Production output uses canonical `coastalarborgroup.com` URLs, redirects HTTPS and `www` traffic to that canonical host, permits indexing, and includes `sitemap.xml`. The thank-you page remains `noindex, follow` and is excluded from the sitemap.
+
 ## Deployment
 
-Deploy the contents of `dist/` to the DreamHost document root for `https://static-dev.coastalarborgroup.com/`. The preview is intentionally marked `noindex, nofollow`, and `dist/robots.txt` blocks indexing.
+The preview workflow deploys pushes to `main` to `https://static-dev.coastalarborgroup.com/`. The production workflow is manual-only, requires the operator to type `coastalarborgroup.com`, validates the production build, verifies the destination path, and then deploys to DreamHost.
 
 The consultation form routes to `info@coastalarborgroup.com`. FormSubmit may send a one-time activation email to that inbox after the first submission.
 
@@ -48,3 +63,10 @@ If automated SFTP deployment is added, the expected GitHub repository secrets ar
 - `DREAMHOST_USERNAME`
 - `DREAMHOST_PASSWORD`
 - `DREAMHOST_PATH`
+
+Production additionally requires:
+
+- `DREAMHOST_PROD_HOST`
+- `DREAMHOST_PROD_USERNAME`
+- `DREAMHOST_PROD_PASSWORD`
+- `DREAMHOST_PROD_PATH` (must equal `coastalarborgroup.com`)

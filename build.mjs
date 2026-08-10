@@ -4,6 +4,8 @@ import { createHash } from "node:crypto";
 
 const root = process.cwd();
 const outputRoot = join(root, "dist");
+const siteUrl = (process.env.SITE_URL || "https://static-dev.coastalarborgroup.com").replace(/\/+$/, "");
+const isIndexable = process.env.SITE_INDEXABLE === "true";
 const siteCssVersion = createHash("sha256").update(readFileSync(join(root, "site.css"), "utf8")).digest("hex").slice(0, 12);
 
 const pages = [
@@ -143,7 +145,7 @@ function consultationContent() {
       <form class="cag-consultation-form" action="https://formsubmit.co/info@coastalarborgroup.com" method="post">
         <input type="hidden" name="_subject" value="New Coastal &amp; Arbor consultation request">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://static-dev.coastalarborgroup.com/thank-you/">
+        <input type="hidden" name="_next" value="${siteUrl}/thank-you/">
         <label for="consultation-name">Full name</label>
         <input id="consultation-name" name="name" type="text" autocomplete="name" required>
         <label for="consultation-email">Email address</label>
@@ -240,13 +242,16 @@ function reviewsContent(source) {
 function pageDocument(page, content) {
   const description = page.description || `${page.label} services and information from Coastal & Arbor Real Estate Group in Hampton Roads.`;
   const pageLabel = page.route ? `<div class="page-label"><div>${page.label}</div></div>` : "";
+  const pathname = page.route ? `/${page.route}/` : "/";
+  const robots = isIndexable && page.route !== "thank-you" ? "index, follow" : isIndexable ? "noindex, follow" : "noindex, nofollow";
   return `<!doctype html>
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="${robots}">
   <meta name="description" content="${description}">
+  <link rel="canonical" href="${siteUrl}${pathname}">
   <title>${page.title}</title>
   <link rel="stylesheet" href="/site.css?v=${siteCssVersion}">
 </head>
@@ -285,7 +290,33 @@ for (const page of pages) {
 
 cpSync(join(root, "site.css"), join(outputRoot, "site.css"));
 cpSync(join(root, "assets"), join(outputRoot, "assets"), { recursive: true });
-cpSync(join(root, ".htaccess"), join(outputRoot, ".htaccess"));
-writeFileSync(join(outputRoot, "robots.txt"), "User-agent: *\nDisallow: /\n", "utf8");
+const baseHtaccess = readFileSync(join(root, ".htaccess"), "utf8").trim();
+const productionRedirects = isIndexable ? `
 
-console.log(`Built ${pages.length} static pages in ${outputRoot}`);
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\\.coastalarborgroup\\.com$ [NC]
+  RewriteRule ^ https://coastalarborgroup.com%{REQUEST_URI} [R=301,L]
+</IfModule>` : "";
+writeFileSync(join(outputRoot, ".htaccess"), `${baseHtaccess}${productionRedirects}\n`, "utf8");
+
+const robotsText = isIndexable
+  ? `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`
+  : "User-agent: *\nDisallow: /\n";
+writeFileSync(join(outputRoot, "robots.txt"), robotsText, "utf8");
+
+if (isIndexable) {
+  const sitemapPages = pages.filter((page) => page.route !== "thank-you");
+  const sitemapUrls = sitemapPages.map((page) => {
+    const pathname = page.route ? `/${page.route}/` : "/";
+    return `  <url><loc>${siteUrl}${pathname}</loc></url>`;
+  }).join("\n");
+  writeFileSync(join(outputRoot, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls}
+</urlset>
+`, "utf8");
+}
+
+console.log(`Built ${pages.length} ${isIndexable ? "production" : "staging"} pages for ${siteUrl} in ${outputRoot}`);
