@@ -134,34 +134,59 @@ function consultationContent() {
   <div class="cag-inner">
     <p class="cag-eyebrow">Start a Conversation</p>
     <h1>Request a Consultation</h1>
-    <p class="cag-lead">Tell us what you are looking for and a member of Coastal &amp; Arbor will follow up with you directly.</p>
+    <p class="cag-lead">Choose what you need, share a few details, and our team will point you in the right direction.</p>
   </div>
 </section>
 <section class="cag-section">
   <div class="cag-inner cag-consultation-wrap">
     <div class="cag-consultation-card">
       <form class="cag-consultation-form" action="https://formsubmit.co/info@coastalarborgroup.com" method="post">
-        <input type="hidden" name="_subject" value="New Coastal &amp; Arbor consultation request">
+        <input type="hidden" name="_subject" value="New Coastal &amp; Arbor website inquiry">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="source" value="Coastal &amp; Arbor consultation page">
         <input type="hidden" name="_next" value="${siteUrl}/thank-you/">
-        <label for="consultation-name">Full name</label>
-        <input id="consultation-name" name="name" type="text" autocomplete="name" required>
-        <label for="consultation-email">Email address</label>
-        <input id="consultation-email" name="email" type="email" autocomplete="email" required>
-        <label for="consultation-phone">Phone number</label>
-        <input id="consultation-phone" name="phone" type="tel" autocomplete="tel">
-        <label for="consultation-type">How can we help?</label>
-        <select id="consultation-type" name="consultation-type" required>
-          <option value="">Select a consultation type</option>
-          <option>Buying a home</option><option>Selling a property</option><option>Property management</option>
-          <option>Real estate investment</option><option>Rental inquiry</option><option>Other</option>
-        </select>
-        <label for="consultation-message">Message</label>
-        <textarea id="consultation-message" name="message" rows="7" maxlength="2000" required></textarea>
-        <button class="cag-button" type="submit">Request a Consultation</button>
+        <input class="cag-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
+
+        <fieldset class="cag-service-picker">
+          <legend>How can we help?</legend>
+          <p class="cag-field-hint">Select one option to personalize your request.</p>
+          <div class="cag-service-options">
+            <label><input type="radio" name="Service requested" value="Property management" required><span><strong>Property Management</strong><small>Support for a rental property</small></span></label>
+            <label><input type="radio" name="Service requested" value="Buy a home"><span><strong>Buy a Home</strong><small>Find the right place to call home</small></span></label>
+            <label><input type="radio" name="Service requested" value="Sell a property"><span><strong>Sell a Property</strong><small>Plan your next move</small></span></label>
+            <label><input type="radio" name="Service requested" value="Real estate investment"><span><strong>Real Estate Investment</strong><small>Explore an investment opportunity</small></span></label>
+            <label><input type="radio" name="Service requested" value="Rental inquiry"><span><strong>Rental Inquiry</strong><small>Ask about an available rental</small></span></label>
+            <label><input type="radio" name="Service requested" value="Existing client"><span><strong>Existing Client</strong><small>Reach the right portal or team member</small></span></label>
+          </div>
+        </fieldset>
+
+        <div class="cag-client-shortcuts">
+          <p><strong>Already working with us?</strong> For the fastest service, use your AppFolio portal.</p>
+          <div class="cag-actions"><a class="cag-button cag-button--outline" href="https://coastalarborgroup.appfolio.com/connect" target="_blank" rel="noopener">Resident Portal</a><a class="cag-button cag-button--outline" href="https://coastalarborgroup.appfolio.com/oportal" target="_blank" rel="noopener">Owner Portal</a></div>
+          <p class="cag-field-hint">You can still send the form below if the portal does not fit your request.</p>
+        </div>
+
+        <div class="cag-contact-grid">
+          <div><label for="consultation-name">Full name</label><input id="consultation-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+          <div><label for="consultation-email">Email address</label><input id="consultation-email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
+          <div><label for="consultation-phone">Phone number <span>(optional)</span></label><input id="consultation-phone" name="Phone" type="tel" autocomplete="tel" maxlength="30"></div>
+        </div>
+
+        <div class="cag-service-detail cag-detail-management"><label for="management-property">What property needs management? <span>(optional)</span></label><input id="management-property" name="Property management address" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
+        <div class="cag-service-detail cag-detail-buy"><label for="buy-area">Where would you like to buy? <span>(optional)</span></label><input id="buy-area" name="Preferred buying area" type="text" maxlength="200" placeholder="City, neighborhood, or ZIP code"></div>
+        <div class="cag-service-detail cag-detail-sell"><label for="sell-property">What property are you considering selling? <span>(optional)</span></label><input id="sell-property" name="Property for sale" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
+        <div class="cag-service-detail cag-detail-investment"><label for="investment-interest">What type of opportunity interests you? <span>(optional)</span></label><input id="investment-interest" name="Investment interest" type="text" maxlength="200" placeholder="For example: rental property or portfolio growth"></div>
+        <div class="cag-service-detail cag-detail-rental"><label for="rental-property">Which rental interests you? <span>(optional)</span></label><input id="rental-property" name="Rental of interest" type="text" maxlength="200" placeholder="Property address or listing name"></div>
+
+        <label for="consultation-message">How can we help?</label>
+        <textarea id="consultation-message" name="Message" rows="5" maxlength="1500" required placeholder="A sentence or two is plenty."></textarea>
+        <label class="cag-consent"><input type="checkbox" name="Contact permission" value="Yes" required><span>I agree that Coastal &amp; Arbor may contact me about this request.</span></label>
+        <p class="cag-form-note">Please do not include Social Security numbers, banking details, or other sensitive information.</p>
+        <button class="cag-button" type="submit">Send My Request</button>
       </form>
     </div>
-    <p class="centered-note">Prefer email? Contact <a href="mailto:info@coastalarborgroup.com">info@coastalarborgroup.com</a>.</p>
+    <p class="centered-note">Most people finish in under a minute. Prefer email? Contact <a href="mailto:info@coastalarborgroup.com">info@coastalarborgroup.com</a>.</p>
   </div>
 </section>`;
 }
@@ -177,8 +202,8 @@ function thankYouContent() {
 <section class="cag-section cag-thank-you">
   <div class="cag-inner">
     <h2>What happens next?</h2>
-    <p>April or a member of the Coastal &amp; Arbor team will review your information and follow up with you directly. You can continue exploring the site while you wait.</p>
-    <div class="cag-actions"><a class="cag-button" href="/">Return Home</a><a class="cag-button cag-button--outline" href="/search-homes/">Search Homes</a></div>
+    <p>April or a member of the Coastal &amp; Arbor team will review your information and follow up with you directly. Existing residents and owners can use their portal for time-sensitive account or maintenance requests.</p>
+    <div class="cag-actions"><a class="cag-button" href="/">Return Home</a><a class="cag-button cag-button--outline" href="/search-homes/">Search Homes</a><a class="cag-button cag-button--outline" href="/available-rentals/">View Rentals</a></div>
   </div>
 </section>`;
 }
