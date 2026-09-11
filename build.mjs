@@ -144,7 +144,7 @@ function consultationContent() {
         <input type="hidden" name="_subject" value="New Coastal &amp; Arbor website inquiry">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="source" value="Coastal &amp; Arbor consultation page">
+        <input type="hidden" name="Source" value="Coastal &amp; Arbor consultation page">
         <input type="hidden" name="_next" value="${siteUrl}/thank-you/">
         <fieldset class="cag-service-picker">
           <legend>How can we help?</legend>
@@ -167,7 +167,7 @@ function consultationContent() {
 
         <div class="cag-contact-grid">
           <div><label for="consultation-name">Full name</label><input id="consultation-name" name="Full&nbsp;Name" type="text" autocomplete="name" maxlength="100" required></div>
-          <div><label for="consultation-email">Email address</label><input id="consultation-email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
+          <div><label for="consultation-email">Email address</label><input id="consultation-email" name="Email" type="email" autocomplete="email" maxlength="200" required></div>
           <div><label for="consultation-phone">Phone number <span>(optional)</span></label><input id="consultation-phone" name="Phone&nbsp;Number" type="tel" autocomplete="tel" maxlength="30"></div>
         </div>
 
