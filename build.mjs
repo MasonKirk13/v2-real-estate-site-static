@@ -150,12 +150,12 @@ function consultationContent() {
           <legend>How can we help?</legend>
           <p class="cag-field-hint">Select one option to personalize your request.</p>
           <div class="cag-service-options">
-            <label><input type="radio" name="Service requested" value="Property management" required><span><strong>Property Management</strong><small>Support for a rental property</small></span></label>
-            <label><input type="radio" name="Service requested" value="Buy a home"><span><strong>Buy a Home</strong><small>Find the right place to call home</small></span></label>
-            <label><input type="radio" name="Service requested" value="Sell a property"><span><strong>Sell a Property</strong><small>Plan your next move</small></span></label>
-            <label><input type="radio" name="Service requested" value="Real estate investment"><span><strong>Real Estate Investment</strong><small>Explore an investment opportunity</small></span></label>
-            <label><input type="radio" name="Service requested" value="Rental inquiry"><span><strong>Rental Inquiry</strong><small>Ask about an available rental</small></span></label>
-            <label><input type="radio" name="Service requested" value="Existing client"><span><strong>Existing Client</strong><small>Reach the right portal or team member</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Property management" required><span><strong>Property Management</strong><small>Support for a rental property</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Buy a home"><span><strong>Buy a Home</strong><small>Find the right place to call home</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Sell a property"><span><strong>Sell a Property</strong><small>Plan your next move</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Real estate investment"><span><strong>Real Estate Investment</strong><small>Explore an investment opportunity</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Rental inquiry"><span><strong>Rental Inquiry</strong><small>Ask about an available rental</small></span></label>
+            <label><input type="radio" name="Service&nbsp;Requested" value="Existing client"><span><strong>Existing Client</strong><small>Reach the right portal or team member</small></span></label>
           </div>
         </fieldset>
 
@@ -166,20 +166,20 @@ function consultationContent() {
         </div>
 
         <div class="cag-contact-grid">
-          <div><label for="consultation-name">Full name</label><input id="consultation-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+          <div><label for="consultation-name">Full name</label><input id="consultation-name" name="Full&nbsp;Name" type="text" autocomplete="name" maxlength="100" required></div>
           <div><label for="consultation-email">Email address</label><input id="consultation-email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
-          <div><label for="consultation-phone">Phone number <span>(optional)</span></label><input id="consultation-phone" name="Phone" type="tel" autocomplete="tel" maxlength="30"></div>
+          <div><label for="consultation-phone">Phone number <span>(optional)</span></label><input id="consultation-phone" name="Phone&nbsp;Number" type="tel" autocomplete="tel" maxlength="30"></div>
         </div>
 
-        <div class="cag-service-detail cag-detail-management"><label for="management-property">What property needs management? <span>(optional)</span></label><input id="management-property" name="Property management address" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
-        <div class="cag-service-detail cag-detail-buy"><label for="buy-area">Where would you like to buy? <span>(optional)</span></label><input id="buy-area" name="Preferred buying area" type="text" maxlength="200" placeholder="City, neighborhood, or ZIP code"></div>
-        <div class="cag-service-detail cag-detail-sell"><label for="sell-property">What property are you considering selling? <span>(optional)</span></label><input id="sell-property" name="Property for sale" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
-        <div class="cag-service-detail cag-detail-investment"><label for="investment-interest">What type of opportunity interests you? <span>(optional)</span></label><input id="investment-interest" name="Investment interest" type="text" maxlength="200" placeholder="For example: rental property or portfolio growth"></div>
-        <div class="cag-service-detail cag-detail-rental"><label for="rental-property">Which rental interests you? <span>(optional)</span></label><input id="rental-property" name="Rental of interest" type="text" maxlength="200" placeholder="Property address or listing name"></div>
+        <div class="cag-service-detail cag-detail-management"><label for="management-property">What property needs management? <span>(optional)</span></label><input id="management-property" name="Property&nbsp;Management&nbsp;Address" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
+        <div class="cag-service-detail cag-detail-buy"><label for="buy-area">Where would you like to buy? <span>(optional)</span></label><input id="buy-area" name="Preferred&nbsp;Buying&nbsp;Area" type="text" maxlength="200" placeholder="City, neighborhood, or ZIP code"></div>
+        <div class="cag-service-detail cag-detail-sell"><label for="sell-property">What property are you considering selling? <span>(optional)</span></label><input id="sell-property" name="Property&nbsp;for&nbsp;Sale" type="text" autocomplete="street-address" maxlength="200" placeholder="Address or general location"></div>
+        <div class="cag-service-detail cag-detail-investment"><label for="investment-interest">What type of opportunity interests you? <span>(optional)</span></label><input id="investment-interest" name="Investment&nbsp;Interest" type="text" maxlength="200" placeholder="For example: rental property or portfolio growth"></div>
+        <div class="cag-service-detail cag-detail-rental"><label for="rental-property">Which rental interests you? <span>(optional)</span></label><input id="rental-property" name="Rental&nbsp;of&nbsp;Interest" type="text" maxlength="200" placeholder="Property address or listing name"></div>
 
         <label for="consultation-message">How can we help?</label>
         <textarea id="consultation-message" name="Message" rows="5" maxlength="1500" required placeholder="A sentence or two is plenty."></textarea>
-        <label class="cag-consent"><input type="checkbox" name="Contact permission" value="Yes" required><span>I agree that Coastal &amp; Arbor may contact me about this request.</span></label>
+        <label class="cag-consent"><input type="checkbox" name="Permission&nbsp;to&nbsp;Contact" value="Yes" required><span>I agree that Coastal &amp; Arbor may contact me about this request.</span></label>
         <p class="cag-form-note">Please do not include Social Security numbers, banking details, or other sensitive information.</p>
         <button class="cag-button" type="submit">Send My Request</button>
       </form>
