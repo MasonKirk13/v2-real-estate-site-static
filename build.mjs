@@ -146,8 +146,6 @@ function consultationContent() {
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="source" value="Coastal &amp; Arbor consultation page">
         <input type="hidden" name="_next" value="${siteUrl}/thank-you/">
-        <input class="cag-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
-
         <fieldset class="cag-service-picker">
           <legend>How can we help?</legend>
           <p class="cag-field-hint">Select one option to personalize your request.</p>
